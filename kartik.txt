@@ -1,0 +1,115 @@
+#include <iostream>
+
+using namespace std;
+class student
+{
+    char sname[20];
+    int age;
+    char branch[20];
+    int year,sem;
+    float percen;
+    public:
+ /*   student()
+    {
+        sname="unknown";
+        age=0;
+        branch="CSE";
+        year=0000;
+        sem=0;
+        percen=0.0;
+    }*/
+    void add();
+    void display();
+    float percentage()
+    {
+        return percen;
+    }
+}s[1000];
+void filter(int percen,int n);
+void student::add()
+{
+    cout<<"\nEnter your name : ";
+    cin>>sname;
+    cout<<"\nEnter your age : ";
+    cin>>age;
+    cout<<"\nEnter your branch : ";
+    cin>>branch;
+    cout<<"\nEnter your year : ";
+    cin>>year;
+    cout<<"\nEnter your sem : ";
+    cin>>sem;
+    cout<<"\nEnter your previous semester score : ";
+    cin>>percen;
+}
+void student::display()
+{
+    cout<<"\nName : "<<sname;
+    cout<<"\nAge : "<<age;
+    cout<<"\nBranch : "<<branch;
+    cout<<"\nYear : "<<year;
+    cout<<"\nSemester : "<<sem;
+    cout<<"\nPrevious Semester Score : "<<percen;
+}
+int main()
+{
+    int choice=0,n,pss,i=0;
+    cout<<"\t\tWelcome to Management System ";
+xyz:    cout<<"\nEnter number of student for which you want to enter record(<1000): ";
+    cin>>n;
+    if(n>=1000)
+    {
+        cout<<"\nEnter a value < 1000";
+        goto xyz;
+    }
+    for(i=0;i<n;i++)
+    {
+        s[i].add();    
+    }
+    cout<<"\n\nAll "<<i<<" recordes has been submitted"<<endl;
+    cout<<endl;
+    cout<<"\t\tList of students "<<endl;
+    for(int i=0;i<n;i++)
+    {
+        cout<<"\nS.no : "<<i+1;
+        s[i].display();    
+        cout<<endl;
+    }
+mnb:    cout<<"\nDo you want to filter data (0 for no,1 for yes): ";
+    cin>>choice;
+    if(choice==0)
+    {
+        cout<<"\n Thank You ";
+    }
+    else if(choice==1)
+    {
+        goto abc;
+    }
+    else
+    {
+        cout<<"\nEnter either 0 or 1";
+        goto mnb;
+    }
+abc:    cout<<"\nEnter Previous Semester Score to filter data: ";
+    cin>>pss;
+    if(pss<1 || pss>100)
+    {
+        cout<<"\nEnter value between 1 to 100";
+        goto abc;
+    }
+    cout<<"\n\n\t\tFiltered Data\n";
+    filter(pss,n);
+   return 0;
+}
+void filter(int percen,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        float x;
+        x=s[i].percentage();
+        if(x>=percen)
+        {
+            cout<<"\nS.No : "<<i+1;
+            s[i].display();
+        }
+    }
+}
